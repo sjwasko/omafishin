@@ -61,7 +61,7 @@ Changes save as soon as you make them.
 | Option | Choices |
 |---|---|
 | Default view (left-click) | Today, Next N days, Best of next N, Month |
-| Days (list / best) | 1–15 |
+| Days (list / best) | 1–31 |
 | Location | fishin saved, or a custom city |
 | Custom city | A place name, such as `key west fl` |
 | Display name | Optional title for the forecast panel |
@@ -70,7 +70,7 @@ Changes save as soon as you make them.
 | Window mode | Floating or tiled |
 | Keep open until keypress | On / off |
 
-Days stop at 15 because the weather forecast fishin uses only covers about 16 days, and asking for more drops the weather from the whole view.
+Weather covers about the next 16 days; days after that show solunar and tides only. This needs fishin 0.3.1 or later; to update an older copy, run `pipx install --force git+https://github.com/sjwasko/fishin`.
 
 ## Uninstall
 

@@ -33,9 +33,9 @@ Panel {
 
   readonly property var viewOrder: ["today", "days", "best", "month"]
   readonly property int minDays: 1
-  // open-meteo forecasts ~16 days and fishin requests N+1, so 16+ days
-  // loses weather for the whole view. Keep list/best views within range.
-  readonly property int maxDays: 15
+  // fishin 0.3.1+ shows weather for the ~16 days open-meteo covers and
+  // solunar/tides alone past that, so a full month is fine.
+  readonly property int maxDays: 31
 
   readonly property string defaultView: viewOrder.indexOf(String(setting("defaultView", "today"))) >= 0
                                         ? String(setting("defaultView", "today")) : "today"
