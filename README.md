@@ -6,6 +6,10 @@ An [Omarchy](https://omarchy.org) bar-widget plugin for [fishin'](https://github
 
 The fishin' app itself is developed at [sjwasko/fishin](https://github.com/sjwasko/fishin). This repo holds only the Omarchy plugin.
 
+## Repository
+
+Developed on a private Forgejo instance and mirrored here automatically.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
