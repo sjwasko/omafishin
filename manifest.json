@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "swasko.omafishin",
+  "name": "Omafishin'",
+  "version": "1.0.0",
+  "author": "swasko",
+  "license": "MIT",
+  "homepage": "https://github.com/sjwasko/omafishin",
+  "description": "Best fishing times and days from the bar: solunar, tide, and weather forecasts from the fishin' app",
+  "kinds": ["bar-widget"],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "Omafishin'",
+    "description": "Click the fish for your default forecast; right-click for more views and options",
+    "category": "Utilities",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "defaultView": "today",
+      "days": 7,
+      "locationSource": "saved",
+      "city": "",
+      "displayName": "",
+      "tides": true,
+      "weather": true,
+      "windowMode": "floating",
+      "holdOpen": true
+    },
+    "schema": [
+      { "key": "defaultView", "type": "enum", "label": "Default view (left-click)", "options": ["today", "days", "best", "month"], "defaultValue": "today" },
+      { "key": "days", "type": "number", "label": "Days for list and best views", "defaultValue": 7 },
+      { "key": "locationSource", "type": "enum", "label": "Location", "options": ["saved", "custom"], "defaultValue": "saved" },
+      { "key": "city", "type": "string", "label": "Custom city", "defaultValue": "" },
+      { "key": "displayName", "type": "string", "label": "Display name", "defaultValue": "" },
+      { "key": "tides", "type": "bool", "label": "Include tides", "defaultValue": true },
+      { "key": "weather", "type": "bool", "label": "Include weather", "defaultValue": true },
+      { "key": "windowMode", "type": "enum", "label": "Window mode", "options": ["floating", "tiled"], "defaultValue": "floating" },
+      { "key": "holdOpen", "type": "bool", "label": "Keep open until keypress", "defaultValue": true }
+    ]
+  }
+}

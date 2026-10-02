@@ -1,0 +1,60 @@
+#!/bin/bash
+# Run fishin in the terminal window opened by the Omafishin' bar widget.
+#
+# Usage: omafishin-view [--hold|--no-hold] [--encoded] [fishin args...]
+#   --hold     wait for a keypress before the window closes (default)
+#   --no-hold  close as soon as fishin exits
+#   --encoded  fishin args are percent-encoded (the bar widget does this so
+#              spaces survive the terminal's own argument handling)
+#
+# fishin itself lives at https://github.com/sjwasko/fishin. If it is missing,
+# offer to install it with pipx rather than failing silently.
+
+export PATH="$HOME/.local/bin:$PATH"
+
+FISHIN_SOURCE="git+https://github.com/sjwasko/fishin"
+
+hold=1
+case "${1:-}" in
+  --hold) hold=1; shift ;;
+  --no-hold) hold=0; shift ;;
+esac
+
+if [[ ${1:-} == --encoded ]]; then
+  shift
+  decoded=()
+  for arg in "$@"; do
+    decoded+=("$(printf '%b' "${arg//%/\\x}")")
+  done
+  set -- "${decoded[@]}"
+fi
+
+wait_for_key() {
+  printf '\n\e[2m  press any key to close\e[0m'
+  read -rsn1
+}
+
+if ! type -P fishin >/dev/null; then
+  echo "Omafishin' needs the fishin app, which isn't installed."
+  echo
+  if ! type -P pipx >/dev/null; then
+    echo "Install pipx first (sudo pacman -S python-pipx), then run:"
+    echo "  pipx install $FISHIN_SOURCE"
+    wait_for_key
+    exit 1
+  fi
+  read -rp "Install it now with 'pipx install $FISHIN_SOURCE'? [y/N] " answer
+  if [[ ${answer,,} == y* ]]; then
+    pipx install "$FISHIN_SOURCE" || { wait_for_key; exit 1; }
+    echo
+  else
+    wait_for_key
+    exit 1
+  fi
+fi
+
+fishin "$@"
+
+if (( hold )); then
+  wait_for_key
+fi
